@@ -2,6 +2,7 @@ Package hvec_flow. Contains Python implementation of
 frequently used formulae for flow in hydraulic engineering.
 
 Subpackages:
+
 - channelflow; functions related to open channel flow
 - constants; list of regularly used constants
 - culverts; functions for flow in culverts
