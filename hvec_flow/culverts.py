@@ -11,7 +11,7 @@ Prepared by HVEC lab, 2022
 """
 
 import numpy as np
-from hvec_flow.constants import g
+from constants import g
 
 
 @np.vectorize
