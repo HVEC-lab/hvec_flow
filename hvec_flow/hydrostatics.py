@@ -1,5 +1,12 @@
+"""
+Package hvec_flow, subpackage hydrostatics.
 
-# In[80] Profile averaged flow characteristics
+HVEC-lab, May 2022
+"""
+
+from constants import g
+
+
 def p(h, z, rhow = 1025):
     """
     Hydrostatic pressure
