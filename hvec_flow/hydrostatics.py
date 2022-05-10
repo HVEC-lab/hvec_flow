@@ -4,7 +4,7 @@ Package hvec_flow, subpackage hydrostatics.
 HVEC-lab, May 2022
 """
 
-from constants import g
+from hvec_flow.constants import g
 
 
 def p(h, z, rhow = 1025):

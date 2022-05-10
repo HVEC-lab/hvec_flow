@@ -6,7 +6,7 @@ Prepared by HVEC lab, 2022
 
 
 from numpy import vectorize
-from constant import g
+from .constants import g
 
 
 @vectorize
