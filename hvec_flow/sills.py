@@ -6,6 +6,7 @@ Prepared by HVEC lab, 2022
 
 
 from numpy import vectorize
+import numpy as np
 from .constants import g
 
 
@@ -49,7 +50,7 @@ def d_crit(q):
     --------
     Cruise, Sherif and Singh - Elementary hydraulics, 2007
     """
-    return (3/2)*((q**2)/g)**(1/3)
+    return ((q**2)/g)**(1/3)
 
 
 @vectorize
@@ -173,7 +174,6 @@ def hw_from_HandQ_elem(Q, H, hbot, Bbot, mleft=0, mright=0):
 
     # Calculate water level corresponding to discharge and energy level
     hw = root_scalar(f, args = (Q), x0 = H - hbot, bracket = [1e-6, H - hbot]).root
-
     return hw
 
 
@@ -214,3 +214,7 @@ def U_from_HandQ(Q, H, hbot, Bbot, mleft=0, mright=0):
     # Calculate velocity
     res = Q/Ac(hw, hbot, Bbot, mleft, mright)
     return res
+
+
+
+
