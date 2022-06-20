@@ -5,6 +5,7 @@ Prepared by HVEC lab, 2022
 """
 
 from numpy import vectorize
+import numpy as np
 
 #TODO: deal with arbitary shapes using package shapely or sectionproperties
 

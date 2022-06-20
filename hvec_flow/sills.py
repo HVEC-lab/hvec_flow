@@ -32,6 +32,40 @@ def q_crit(H_up, h_sill):
     return (2/3)*np.sqrt(2/3*g) * (H_up-h_sill)**(3/2)
 
 
+def q_sub(H_up, H_lo, h_sill):
+    """
+    Subcritical discharge per meter running length for given water levels
+    and sill level
+
+    Parameters
+    ----------
+    H_up : array_like. Upstream water level with respect to reference
+    H_lo: array_like. Downstream water level with respect to reference
+    h_sill : array_like. Sill level with the same reference and units as h_up
+
+    Returns
+    -------
+    q_sub : float
+        Subcritical specific discharge over a sill
+
+    Notes
+    -------
+    No discharge coefficients have been applied here.
+
+    References
+    --------
+    Cruise, Sherif and Singh - Elementary hydraulics, 2007
+    """
+    A = (H_lo - h_sill) # Approximated flow area per meter
+    Hkin = H_up - H_lo  # Approximated kinetic head
+    U = (
+        np.sign(Hkin) * 
+        np.sqrt(2 * g * np.abs(Hkin)
+    ))  # Profile averaged flow velocity
+    qsub = U * A
+    return qsub
+
+
 @vectorize
 def d_crit(q):
     """
@@ -91,6 +125,46 @@ def Q_crit(H_up, h_sill, B):
     """
 
     return q_crit(H_up, h_sill)*B
+
+
+@vectorize
+def Q_sub(H_up, H_lo, h_sill, B):
+    """
+    Subcritical total discharge for given water level and sill level
+
+    Parameters
+    ----------
+    H_up : array_like. Upstream energy level with respect to reference
+    H_lo: array_like. Downstream water level with respect to reference
+    h_sill : array_like. Sill level with the same reference and units as h_up
+    B: array_like. Width of channel in the same units as the levels
+
+    Returns
+    -------
+    Q_sub : float
+        Subcritical total discharge
+
+    See Also
+    --------
+    NA
+
+    Examples
+    --------
+    NA
+
+    Raises
+    --------
+    No warning messages are specified. Informed user is assumed
+
+    Issues
+    --------
+    NA
+
+    References
+    --------
+    Cruise, Sherif and Singh - Elementary hydraulics, 2007
+    """
+    return q_sub(H_up, H_lo, h_sill)*B
 
 
 @vectorize
@@ -214,6 +288,53 @@ def U_from_HandQ(Q, H, hbot, Bbot, mleft=0, mright=0):
     # Calculate velocity
     res = Q/Ac(hw, hbot, Bbot, mleft, mright)
     return res
+
+
+@vectorize
+def capacity(h1, h2, Bfl, hsill, Cd = 1):
+    """
+    Discharge with the traditional long sill formula, accounting for limits of
+    critical flow.
+
+    Parameters
+    -------
+    h1, h2: array_like. Outside water levels
+    Bfl: array_like. Flow width
+    hsill: array_like. Sill level
+    Cd: array_like. Discharge coefficient (default = 1)
+
+    Returns
+    -------
+    Q: array_like. Discharge
+
+    Raises
+    --------
+    NA
+
+    Notes
+    --------
+    Contrary to popular belief, the discharge coefficient is not a constant
+        but varies as a function of head difference. For accurate capacity
+        estimates one of the models in "hvec_strucflow" should be used.
+
+    Issues
+    --------
+    - Implemented for rectangular channel. Generalisation to trapezoidal
+        channel is plan
+
+    References
+    --------
+    Cruise, Sherif and Singh - Elementary hydraulics, 2007
+    """
+    dir = np.sign(h1 - h2)
+    hus = max([h1, h2])
+    hds = min([h1, h2])
+
+    hcr = hsill + (2/3) * (hus - hsill)  # critical water level
+    if hds > hcr:
+        return dir * Q_sub(hus, hds, hsill, Bfl)
+    else:
+        return dir * Q_crit(hus, hsill, Bfl)
 
 
 

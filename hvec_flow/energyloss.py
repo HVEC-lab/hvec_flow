@@ -5,10 +5,11 @@ Prepared by HVEC lab, 2022
 """
 
 from numpy import vectorize
+import numpy as np
 
 
 @vectorize
-def c_f(R, k):
+def cf(R, k):
     """
     Dimensionless friction factor based on the work of Colebrook.
     Based on equation 12.17 in Battjes (1989).
@@ -27,7 +28,7 @@ def c_f(R, k):
 
     Returns
     -------
-    c_f : float
+    cf : float
         Dimensionless friction coefficient
 
     Issues
@@ -49,7 +50,7 @@ def c_f(R, k):
         warnings.warn(
             "hvec_flow function c_f. Negative roughness or negative hydraulic radius"
             )
-    return res
+    return res.squeeze()
 
 
 @vectorize
