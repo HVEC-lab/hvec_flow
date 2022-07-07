@@ -9,6 +9,32 @@ import numpy as np
 
 
 @vectorize
+def ksi_entry(mu_contr):
+    """
+    Loss coefficient for entry of a culvert
+
+    Parameters
+    -------
+    mu_contr : array_like. Contraction of the flow
+
+    Returns
+    -------
+    ksi_entry : float
+        Dimensionless loss coefficient
+
+    Issues
+    --------
+    - Provide English reference
+
+    References
+    --------
+    Battjes (1989) - Fluid mechanics, lecture notes Delft University (in Dutch), pg. 169
+    """
+    return ((1/mu_contr) - 1) ** 2
+
+
+
+@vectorize
 def cf(R, k):
     """
     Dimensionless friction factor based on the work of Colebrook.
@@ -115,6 +141,7 @@ def Ch(R, k):
     else:
         res = float("NaN")    
     return res
+
 
 @vectorize
 def ksi_fr(L, R, k):
