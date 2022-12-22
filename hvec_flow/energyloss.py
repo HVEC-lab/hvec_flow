@@ -7,7 +7,7 @@ Prepared by HVEC lab, 2022
 from numpy import vectorize
 import numpy as np
 
-from .constants import *
+from hvec_flow.constants import *
 
 
 @vectorize

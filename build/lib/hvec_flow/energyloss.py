@@ -7,6 +7,8 @@ Prepared by HVEC lab, 2022
 from numpy import vectorize
 import numpy as np
 
+from .constants import *
+
 
 @vectorize
 def ksi_entry(mu_contr):
