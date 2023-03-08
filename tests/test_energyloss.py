@@ -1,6 +1,5 @@
 from hvec_flow import energyloss as loss
 import math
-import hvec_flow
 
 def test_cf():
     R = 10
