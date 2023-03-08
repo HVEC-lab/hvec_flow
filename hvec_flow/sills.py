@@ -334,10 +334,6 @@ def capacity(h1, h2, Bfl, hsill, Cd = 1):
 
     hcr = hsill + (2/3) * (hus - hsill)  # critical water level
     if hds > hcr:
-        return dir * Q_sub(hus, hds, hsill, Bfl)
+        return dir * Q_sub(hus, hds, hsill, Bfl) * Cd
     else:
-        return dir * Q_crit(hus, hsill, Bfl)
-
-
-
-
+        return dir * Q_crit(hus, hsill, Bfl) * Cd
