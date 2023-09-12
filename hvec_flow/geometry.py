@@ -49,8 +49,8 @@ def Ac(h, z, Bbot, mslope_left=0, mslope_right=0):
     h : array_like. Water level with respect to reference
     z : array_like. Bottom level with the same reference and units as h
     B: array_like. Width of channel in the samen units as h and z
-    hroof: array_like. 
-        The level of the roof in the samen units and reference
+    mslope_left: left slope, defined as 1 vertical in mslope horizontal
+    mslope_right: right slope
 
     Returns
     -------
