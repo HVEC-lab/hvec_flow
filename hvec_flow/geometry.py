@@ -63,8 +63,7 @@ def Ac(h, z, Bbot, mslope_left=0, mslope_right=0):
 @vectorize
 def P(h, z, Bbot, mslope_left=0, mslope_right=0):
     """
-    Perimeter of a channel. Closed conduit covered by providing a roof
-    This is the internal version. The vectorized version is to be used
+    Perimeter of an open channel.
 
     Parameters
     ----------
