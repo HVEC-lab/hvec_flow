@@ -225,4 +225,4 @@ def ifr(cf, U, R):
     --------
     Battjes (1989) - Fluid mechanics, lecture notes Delft University (in Dutch)
     """
-    return -(cf * U**2)/(g * R)
+    return -(cf * U * np.abs(U))/(g * R)
