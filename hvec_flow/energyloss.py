@@ -6,6 +6,7 @@ Prepared by HVEC lab, 2022
 
 from numpy import vectorize
 import numpy as np
+import warnings
 
 from hvec_flow.constants import *
 
