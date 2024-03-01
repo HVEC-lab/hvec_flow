@@ -10,6 +10,7 @@ import numpy as np
 #TODO: deal with arbitary shapes using package shapely or sectionproperties
 
 
+@np.vectorize
 def d(h, z):
     """
     Local flow depth
@@ -17,6 +18,7 @@ def d(h, z):
     return h - z
 
 
+@np.vectorize
 def Bsurf(h, z, Bbot, mslope_left=0, mslope_right=0):
     """
     Width water surface in trapezoidal profile
@@ -37,6 +39,7 @@ def Bsurf(h, z, Bbot, mslope_left=0, mslope_right=0):
     return Bbot + d(h, z) * (mslope_left + mslope_right)
 
 
+@np.vectorize
 def Ac(h, z, Bbot, mslope_left=0, mslope_right=0):
     """
     Cross section area of an open channel
@@ -57,6 +60,7 @@ def Ac(h, z, Bbot, mslope_left=0, mslope_right=0):
     return (1/2)*(Bbot + Bsurf(h, z, Bbot, mslope_left, mslope_right)) * d(h, z)
 
 
+@np.vectorize
 def P(h, z, Bbot, mslope_left=0, mslope_right=0):
     """
     Perimeter of an open channel.
@@ -82,6 +86,7 @@ def P(h, z, Bbot, mslope_left=0, mslope_right=0):
     return res
 
 
+@np.vectorize
 def R(h, z, Bbot, mslope_left = 0, mslope_right = 0):
     """
     Hydraulic radius of an open channel
