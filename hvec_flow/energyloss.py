@@ -11,7 +11,6 @@ import warnings
 from hvec_flow.constants import *
 
 
-@vectorize
 def ksi_entry(mu_contr):
     """
     Loss coefficient for entry of a culvert
@@ -36,8 +35,6 @@ def ksi_entry(mu_contr):
     return ((1/mu_contr) - 1) ** 2
 
 
-
-@vectorize
 def cf(R, k):
     """
     Dimensionless friction factor based on the work of Colebrook.
@@ -79,10 +76,9 @@ def cf(R, k):
         warnings.warn(
             "hvec_flow function c_f. Negative roughness or negative hydraulic radius"
             )
-    return res.squeeze()
+    return res
 
 
-@vectorize
 def ustar(cf, U):
     """
     Friction velocity
@@ -107,7 +103,6 @@ def ustar(cf, U):
     return np.sqrt(cf) * U
 
 
-@vectorize
 def Ch(R, k):
     """
     Chezy coefficient calculated from c_f.
@@ -146,7 +141,6 @@ def Ch(R, k):
     return res
 
 
-@vectorize
 def ksi_fr(L, R, k):
     """
     Loss coefficient for friction in a conduit.
@@ -178,7 +172,6 @@ def ksi_fr(L, R, k):
     return (2 * cf(R, k) * L)/R
 
 
-@vectorize
 def mu(ksi_tot):
     """
     Discharge coefficient calculated from summed loss coefficients
@@ -203,7 +196,6 @@ def mu(ksi_tot):
     return 1/np.sqrt(ksi_tot)
 
 
-@vectorize
 def ifr(cf, U, R):
     """
     Local slope of energy line due to friction
