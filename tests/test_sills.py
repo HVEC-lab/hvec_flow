@@ -47,7 +47,8 @@ def test_d_crit(q, dcr):
 @pyt.mark.parametrize(
     "h1, h2, Bfl, hsill, Cd, expected",
     [  (0.5, -0.05, 7, -3.05, 1  , 68.984)
-     , (0.5, -2.7 , 7, -3.05, 0.9, 71.842)]
+     , (0.5, -2.7 , 7, -3.05, 0.9, 71.842)
+     , (-2.7, 0.5, 7, -3.05, 0.9, -71.842)]
 )
 def test_capacity(h1, h2, Bfl, hsill, Cd, expected):
     res = sl.capacity(h1, h2, Bfl, hsill, Cd)
