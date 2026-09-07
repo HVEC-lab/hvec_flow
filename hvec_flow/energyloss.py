@@ -36,7 +36,6 @@ def ksi_entry(mu_contr):
     return ((1/mu_contr) - 1) ** 2
 
 
-
 @vectorize
 def cf(R, k):
     """
@@ -141,6 +140,40 @@ def Ch(R, k):
     """
     if cf(R, k)>0:
         res = np.sqrt(g/cf(R,k))
+    else:
+        res = float("NaN")    
+    return res
+
+
+@vectorize
+def n_manning(R, k):
+    """
+    Manning coefficient.
+
+    It is advised to use this function only to provide reference 
+    information for verification purposes.
+
+    Parameters
+    -------
+    R : array_like. Hydraulic radius
+    k : array_like. Roughness as defined by Nikuradse
+
+    Returns
+    -------
+    n_manning : float
+        Value of Manning coefficient
+
+    Issues
+    --------
+    - Provide English reference
+
+    References
+    --------
+    Battjes (1989) - Fluid mechanics, lecture notes Delft University (in Dutch)
+    """
+    gamma = 0.12 # Dimensionless constant, see Battjes (1989), pg. 206
+    if (R>0)&(k>0):
+        res = gamma * (1/np.sqrt(g)) * (k**(1/6))
     else:
         res = float("NaN")    
     return res
