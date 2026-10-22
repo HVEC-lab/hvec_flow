@@ -13,3 +13,20 @@ Subpackages:
 - turbulence; functions for calculation of turbulence
 
 Prepared by Hessel Voortman Engineering Consultancy, 2022.
+
+
+Installation
+------------
+
+.. code-block:: console
+
+    pip install git+https://github.com/HVEC-lab/hvec_flow
+
+From a clone of the repository: ``uv sync``.
+
+Tests
+-----
+
+.. code-block:: console
+
+    uv run pytest

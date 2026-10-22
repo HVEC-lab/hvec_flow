@@ -1,0 +1,20 @@
+name: tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Install the locked environment (Python 3.13 from .python-version)
+        run: uv sync --locked
+      - name: Tests
+        run: uv run pytest

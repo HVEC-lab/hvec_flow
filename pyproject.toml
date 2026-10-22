@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hvec_flow"
+dynamic = ["version"]
+description = "Python package for hydraulic engineers dealing with flow and turbulence."
+readme = {file = "Readme.rst", content-type = "text/x-rst"}
+license = "MIT"
+license-files = ["LICENSE.txt"]
+authors = [{name = "Hessel Voortman Engineering Consultancy", email = "hessel@hesselvoortman.nl"}]
+requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Other Audience",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Operating System :: Microsoft :: Windows",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "numpy>=1.17",
+]
+
+[project.urls]
+Homepage = "https://github.com/HVEC-lab/hvec_flow"
+Repository = "https://github.com/HVEC-lab/hvec_flow"
+
+[dependency-groups]
+test = ["pytest"]
+dev = [{include-group = "test"}]
+
+[tool.setuptools.dynamic]
+version = {attr = "hvec_flow.admin.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["hvec_flow*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

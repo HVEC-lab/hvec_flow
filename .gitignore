@@ -1,2 +1,10 @@
-hvec_flow/__pycache__/
-tests/__pycache__/
+.venv/
+__pycache__/
+*.pyc
+*.egg-info
+build/
+dist/
+.pytest_cache/
+.coverage
+docs/_build/
+.ipynb_checkpoints/
